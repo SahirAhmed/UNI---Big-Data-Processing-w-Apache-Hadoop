@@ -1,0 +1,31 @@
+
+module load python/3.7.7
+source bigdatave/bin/activate
+
+local:
+python file.py <inputfile.txt> > <outputfile.txt>
+
+hadoop with local input and output:
+python file.py -r hadoop <inputfile.txt> > <outputfile.txt>
+
+loading a file into hadoop:
+hadoop fs -mkdir <input>
+hadoop fs -copyFromLocal <inputfile.txt> <input>
+
+hadoop with both input and output in HDFS:
+python file.py -r hadoop --output-dir <outputfolder> --no-cat-output <hdfs://andromeda.eecs.qmul.ac.uk/user/
+sa386/input>
+
+loading a file from hadoop into local:
+hadoop fs -copyToLocal <hdfsfile> <localdestination>
+
+removing folder from HDFS:
+hadoop fs -rm -r <folder>
+
+merge all files(parts) from HDFS and merge into single file (local):
+hadoop fs -getmerge <hdfsfolder> <localfilename.txt> 
+
+get scams document to your local:
+hadoop fs -get /data/ethereum/scams.json
+
+hadoop fs -ls
